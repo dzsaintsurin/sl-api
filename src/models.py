@@ -1,10 +1,9 @@
+"""
+Dael Saint-Surin
+02/16/2023
+"""
+
 from pydantic import BaseModel
-
-
-class BodyPost(BaseModel):
-    userId: int
-    title: str
-    body: str
 
 
 class User(BaseModel):
@@ -15,6 +14,3 @@ class User(BaseModel):
 class NewUser(BaseModel):
     email: str = "eve.holt@reqres.in"
     password: str = "pistolx"
-
-
-# class BodyComment(BaseModel):
