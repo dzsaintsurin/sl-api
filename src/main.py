@@ -2,10 +2,13 @@
 Dael Saint-Surin
 02/16/2023
 """
+import uvicorn
+
 from fastapi import FastAPI, HTTPException
 from models import User, NewUser
 from reqres_api import get_resource
 from reqres_api import create_user
+
 
 app = FastAPI()
 
@@ -87,3 +90,7 @@ def validate_response(response):
     if type(response) is tuple:
         raise HTTPException(status_code=response[0], detail=response[1])
     return response
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
