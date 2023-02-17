@@ -9,8 +9,15 @@ from models import User, NewUser
 from reqres_api import get_resource
 from reqres_api import create_user
 
+contact = {"Name": "Dael Saint-Surin", "Email": "dzsaintsurin@protonmail.com"}
 
-app = FastAPI()
+app = FastAPI(
+    title="SL-API",
+    version=1.0,
+    description="Salesloft TechOps Exercise",
+    docs_url="/",
+    contact=contact,
+)
 
 
 @app.get("/api/v1/resource", description="Return a list of available resources")
@@ -25,12 +32,7 @@ async def list_users(page: int):
 
 @app.get("/api/vi/users/{userId}", description="This will get a user by Id")
 async def single_user(userId: int):
-    response = get_resource(userId)
-
-    if type(response) is tuple:
-        raise HTTPException(status_code=response[0], detail=response[1])
-    # print(f'&&&&& {response.status_code} | {response.reason} &&&&&&&')
-    return response
+    return get_resource(userId)
 
 
 @app.get(
