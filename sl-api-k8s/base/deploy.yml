@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy
+  namespace: base
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      volumes:
+        - name: sl-api-volume
+          hostPath:
+            path: /k3d-files/sl-api
+            type: Directory
+      containers:
+      - name: dzsaintsurin-sl-api
+        image: k8s-local-registry:5432/dzsaintsurin/sl-api:1.0
+        volumeMounts:
+          - mountPath: "/app/sl-api"
+            name: sl-api-volume
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

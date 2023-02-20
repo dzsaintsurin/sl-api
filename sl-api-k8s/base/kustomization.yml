@@ -1,0 +1,6 @@
+resources:
+  - "./namespace.yml"
+  - "./deploy.yml"
+  - "./service.yml"
+
+namespace: base
