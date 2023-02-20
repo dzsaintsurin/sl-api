@@ -8,7 +8,7 @@ agents: 3
 image: rancher/k3s:v1.24.10-k3s1
 subnet: "172.30.0.0/16"
 volumes:
-  - volume: "$PWD/k3d-files:/k3d-files"
+  - volume: "$SL_API/sl-api:/k3d-files/sl-api" # Map the directory of the Pyhton codes inside of folder on every worker nodes of the k8s cluster.
     nodeFilters:
       - agent:*
 options:
