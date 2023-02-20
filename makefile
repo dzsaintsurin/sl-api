@@ -26,7 +26,7 @@ delete-deploy-dcompose:
 run-deploy-k8s: create-local-k8s
 	cd sl-api-k8s; \
 	kubectl --context k3d-k8s-local apply -k k8s-local; \
-	sleep 10; \
+	sleep 20; \
 	nohup kubectl --context k3d-k8s-local -n sl-api port-forward svc/svc-sl-api 8080 & \
 	echo '--------------------------------'; \
 	echo "API-URL: http://localhost:8080"; \
