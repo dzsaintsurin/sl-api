@@ -21,6 +21,47 @@ The application use a public api url: [Reqres](https://reqres.in/api) to retriev
 4. A [docker-compose.yml](./docker-compose.yml) file for docker-comose deployment.
 5. There is a (makefile)[./makefile] for automated deployment. This makefile can be use to deploy the application via docker, docker-compose and kubernetes.
 
+# 
+## A Note about the Dockerfile
+In the Dockerfile, I chose not to include the Python application. The Python application is linked to the container image at the deployment time. while this is very minimal with just a few files, I found some docker-image getting very large when the application are hard coded within the container image. Some Container image can be in the Gb size.
+
+This container image has only the Python base image and the needed library installed. 
+
+Dockerfile:
+```sh=
+FROM python:3.10.10-alpine3.17
+
+WORKDIR /app
+
+COPY sl-api-app/requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8080
+
+ENTRYPOINT ["python", "/app/sl-api/main.py"]
+
+```
+
+If we prefer to have the Python code built into the docker image, change the above lines of the Dockerfile to this one below:
+```sh=
+FROM python:3.10.10-alpine3.17
+
+WORKDIR /app
+
+COPY sl-api-app/requirements.txt .
+
+COPY sl-api-app /app/sl-api/app    
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8080
+
+ENTRYPOINT ["python", "/app/sl-api/main.py"]
+
+```
+
+#
 
 ## How to deploy the application.
 To quickly deploy the application, there is a makefile in the root of the repo. The application can be deployed with either:
@@ -92,3 +133,6 @@ make delete-deploy-k8s
 Each of those provided url above will take you to the same Swagger API page of the application.
 
 There are implementation for each of the Vebs provided by the public API [Reqres](https://reqres.in/api)
+
+# 
+### [Back To The Root Repository](https://github.com/dzsaintsurin/sl-api)
