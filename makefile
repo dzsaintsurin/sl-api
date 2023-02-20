@@ -1,11 +1,11 @@
 run-deploy-docker: run-build-image
 	docker run -d --rm --name sl-api \
 	-p 8070:8080 \
-	-v "${PWD}/sl-api:/app/sl-api" \
+	-v "${PWD}/sl-api-app:/app/sl-api" \
 	sl-api:1.0 && \
 	echo '--------------------------------' && \
 	echo "API-URL: http://localhost:8070" && \
-	echo '--------------------------------' 
+	echo '--------------------------------'
 
 
 delete-deploy-doker:
@@ -46,7 +46,7 @@ run-build-image:
 create-local-k8s:
 	cd k8s-local && \
 	bash create_cluster.sh && \
-	echo "Wait a moment to build the cluster" 
+	echo "Wait a moment to build the cluster"
 
 
 delete-local-k8s: delete-deploy-k8s
