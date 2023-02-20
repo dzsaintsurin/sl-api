@@ -3,8 +3,8 @@ services:
   sl-api:
     build:
       context: ./
-      dockerfile: ./dockerfile
+      dockerfile: ./Dockerfile
     ports:
-      - "8080:8080"
+      - "8090:8080"
     volumes:
       - "./sl-api:/app/sl-api"
