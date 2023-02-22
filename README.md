@@ -25,7 +25,7 @@ To run the app locally, you need to have Docker installed on your machine. Then 
 
 1. Clone this repo to your local machine.
 2. Navigate to the repo folder and run `make run-deploy-docker`. This will to build the Docker image and start the container with the app.
-3. Visit `http://localhost:8070` to see the documentation of the Web-API.
+3. Visit [http://localhost:8070](http://localhost:8070) to see the documentation of the Web-API.
 
 Enjoy!
 
@@ -38,8 +38,8 @@ Besides the above, the app can be run via docker-compose or kubernetes. There is
 
 ## How to run the application via docker-compose.
 
-1. Navigate to the repo folder and run `make run-deploy-docker`. This will to build the Docker image and start the container with the app.
-2. Visit [http://localhost:8090]() to see the documentation of the Web-API.
+1. Navigate to the repo folder and run `make run-deploy-docker`. This will to build the Docker image and start the container with the app via docker-compose, and expose the application on port 8090.
+2. Visit [http://localhost:8090](http://localhost:8090) to see the documentation of the Web-API.
 
 Enjoy!
 #
@@ -50,8 +50,12 @@ To run the exact make file, a few packages needs to be installed on your system:
 - [K3D](./k8s-local/README.md#k8s-local-setup)
 - [kubectl](./k8s-local/README.md#k8s-local-setup)
 
-1. Navigate to the repo folder and run `make run-deploy-k8s`. This will to build the Docker image and start the container with the app.
-2. Visit [http://localhost:8080]() to see the documentation of the Web-API.
+1. Navigate to the repo folder and run `make run-deploy-k8s`. This will create a local k8s cluster with 1 master and 3 worker nodes on your local machine, along with a registry to host the container image, then build the Docker image and push it to the k8s registry,  It will also deploy athe app with:
+   - 1 namespace sl-api
+   - 1 deployment (deploy-sl-api) with 3 pods replica in the namespace sl-api 
+   - 1 service (svc-sl-api) of type load balancer  in the namespace sl-api, 
+   - and finally via port-forwarding to expose the service to listen on port 8080 on your local machine.
+2. Visit [http://localhost:8080](http://localhost:8080) to see the documentation of the Web-API.
 
 Enjoy!
 
