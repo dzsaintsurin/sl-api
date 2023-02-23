@@ -8,7 +8,7 @@ run-deploy-docker: run-build-image
 	echo '--------------------------------'
 
 
-delete-deploy-doker:
+delete-deploy-docker:
 	docker stop sl-api
 
 

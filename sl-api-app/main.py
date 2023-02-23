@@ -25,12 +25,12 @@ async def list_resource():
     return validate_response(get_resource())
 
 
-@app.get("/api/vi/users", description="Give a list of the users in the current page")
+@app.get("/api/v1/users", description="Give a list of the users in the current page")
 async def list_users(page: int):
     return validate_response(get_resource(page))
 
 
-@app.get("/api/vi/users/{userId}", description="This will get a user by Id")
+@app.get("/api/v1/users/{userId}", description="This will get a user by Id")
 async def single_user(userId: int):
     return validate_response(get_resource(userId))
 
@@ -43,31 +43,31 @@ async def single_resource(resourceId: int):
     return validate_response(get_resource(f"{resourceId}"))
 
 
-@app.post("/api/vi/users", description="Create a new user")
+@app.post("/api/v1/users", description="Create a new user")
 async def create_users(user: User):
     user = user.dict()
     return validate_response(create_user(user))
 
 
-@app.put("/api/vi/users/{userId}", description="Update an existing user attribut")
+@app.put("/api/v1/users/{userId}", description="Update an existing user attribut")
 async def update_user(userId: int, user: User):
     user = user.dict()
     return validate_response(create_user(user, userId))
 
 
-@app.patch("/api/vi/users/{userId}", description="Similar to Udate User")
+@app.patch("/api/v1/users/{userId}", description="Similar to Udate User")
 async def patch_user(userId: int, user: User):
     user = user.dict()
     return validate_response(create_user(user, userId))
 
 
-@app.delete("/api/vi/users/{userId}", description="Delete a user")
+@app.delete("/api/v1/users/{userId}", description="Delete a user")
 async def delete_user(userId: int):
     return validate_response(create_user(userId=userId))
 
 
 @app.post(
-    "/api/vi/register",
+    "/api/v1/register",
     description="Create a new user, Please Note: Only defined users succeed registration.",
 )
 async def register(user: NewUser):
